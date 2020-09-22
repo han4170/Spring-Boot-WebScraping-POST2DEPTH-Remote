@@ -100,6 +100,28 @@ public class ScrapServiceImpl implements ScrapService{
 			System.out.println("Clicked on : " + element);
 			// 5초간 중지시킨다.(단위 : 밀리세컨드)
 			Thread.sleep(5000);
+			// 국세청 홈텍스 POP-UP Windows Close 
+			String HomeMainWindow = null;
+			Set<String> PopUpWin = null;
+			Iterator<String> PopUpWinI = null;
+			HomeMainWindow = driver.getWindowHandle();
+			// 새로 열린 모든 창을 처리합니다.
+			PopUpWin = driver.getWindowHandles();
+			PopUpWinI = PopUpWin.iterator();
+
+			while (PopUpWinI.hasNext()) {
+				String PopUpWindow = PopUpWinI.next();
+
+				if (!HomeMainWindow.equalsIgnoreCase(PopUpWindow)) {
+
+					// 하위 창으로 전환
+					driver.switchTo().window(PopUpWindow);
+					// 자식 창 닫기.
+					driver.close();
+				}
+			}
+			// 부모 윈도우, 즉 메인 윈도우로 전환.
+			driver.switchTo().window(HomeMainWindow);			
 			//**********************
 			//3. 로그인 화면
 			//**********************
@@ -136,10 +158,29 @@ public class ScrapServiceImpl implements ScrapService{
 			WebElement element5 = driver.findElement(By.id("btn_confirm_iframe"));
 			element5.click();
 			System.out.println("Clicked on : " + element5);
+
+			// 3.8 로그인 완료 후 POP-UP Windows Close
+			Thread.sleep(3000);
+			PopUpWin = driver.getWindowHandles();
+			PopUpWinI = PopUpWin.iterator();
+
+			while (PopUpWinI.hasNext()) {
+				String PopUpWindow = PopUpWinI.next();
+
+				if (!HomeMainWindow.equalsIgnoreCase(PopUpWindow)) {
+
+					// 하위 창으로 전환
+					driver.switchTo().window(PopUpWindow);
+					// 자식 창 닫기.
+					driver.close();
+				}
+			}
+			// 부모 윈도우, 즉 메인 윈도우로 전환.
+			driver.switchTo().window(HomeMainWindow);			
 			//**********************
 			//4. 조회 메뉴 선택
 			//**********************
-			Thread.sleep(5000);
+			Thread.sleep(1000);
 			// WebElement element6 =
 			// driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div/div[1]/div[2]/div/ul/li[1]/a"));
 			WebElement element6 = driver.findElement(By.id("group1300"));
