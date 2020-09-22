@@ -114,9 +114,10 @@ public class ScrapServiceImpl implements ScrapService{
 
 			//3.3 공인인증서 - 프레임 이동
 			driver.switchTo().frame("dscert");
-			/*
+
 			//3.4 공인인증서 - 하드디스크 이동식 선택
-			WebElement element2 = driver.findElement(By.xpath("/html[1]/body[1]/div[5]/div[2]/div[1]/div[1]/div[4]/div[1]/form[1]/div[1]/div[1]/ul[1]/li[2]/a[1]"));
+			//WebElement element2 = driver.findElement(By.xpath("/html[1]/body[1]/div[5]/div[2]/div[1]/div[1]/div[4]/div[1]/form[1]/div[1]/div[1]/ul[1]/li[2]/a[1]"));
+			WebElement element2 = driver.findElement(By.cssSelector("#stg_hdd"));
 			element2.click();
 			System.out.println("Clicked on : " + element2);
 			//3.5 공인인증서 - 로컬 디스크 (C) 선택
@@ -124,7 +125,7 @@ public class ScrapServiceImpl implements ScrapService{
 			WebElement element3 = driver.findElement(By.xpath("//a[text()='로컬 디스크 (C)']"));
 			element3.click();
 			System.out.println("Clicked on : " + element3);
-			*/
+
 			//3.6 공인인증서 - 인증서비밀번호 입력
 			WebElement element4 = driver.findElement(By.id("input_cert_pw"));
 			// element4.sendKeys("alghkoo3**");
